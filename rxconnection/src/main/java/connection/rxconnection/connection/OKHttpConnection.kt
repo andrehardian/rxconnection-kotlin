@@ -96,6 +96,7 @@ class OKHttpConnection<T, E>(private val callBackOKHttp: CallBackOKHttp) : Heade
                         total += count.toLong()
                         outputStream.write(dataFile, 0, count)
                         progressDownloadListener.progress(total / response.body()!!.contentLength() * 100)
+                        count = bufferedInputStream.read(dataFile)
                     }
 
                     outputStream.flush()

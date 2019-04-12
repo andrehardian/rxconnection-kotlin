@@ -18,6 +18,7 @@ class BaseServiceResponse(var connectionListener: ConnectionListener) :
     }
 
     override fun onCompleted() {
+        callBackSubscriber!!.onServiceFinish()
         unsubscribe()
     }
 

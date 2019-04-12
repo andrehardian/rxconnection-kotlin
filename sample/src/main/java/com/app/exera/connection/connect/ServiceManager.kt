@@ -36,4 +36,5 @@ class ServiceManager : ConnectionManager(), ProgressDownloadListener {
     override fun error(body: String) {
         Log.d("test", body)
     }
+
 }
