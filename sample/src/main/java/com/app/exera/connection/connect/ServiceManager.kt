@@ -15,12 +15,12 @@ import java.util.*
 
 class ServiceManager : ConnectionManager(), ProgressDownloadListener {
     fun login(loginRequest: RequestLogin) {
-        subscribe(LoginCon(loginRequest, this!!.context!!).setLogInfoRequestResponse(true))
+        subscribe(LoginCon(loginRequest, context!!).setLogInfoRequestResponse(true))
     }
 
     fun download(s: String) {
         var file: File = File(Environment.getExternalStorageDirectory().path + "/imdownload.jpg");
-        val httpRequest = ConDownloadDB(this!!.context!!, s,
+        val httpRequest = ConDownloadDB(context!!, s,
                 file,
                 this)
         val header = HashMap<String, String>()

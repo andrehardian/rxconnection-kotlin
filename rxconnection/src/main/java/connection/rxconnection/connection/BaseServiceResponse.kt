@@ -23,7 +23,6 @@ class BaseServiceResponse(var connectionListener: ConnectionListener) :
     }
 
     override fun onError(e: Throwable) {
-        callBackSubscriber!!.onServiceFinish()
         if (e is ExceptionHttpRequest) {
             val response = e.response
             if (response.code() == 401) {
@@ -39,7 +38,6 @@ class BaseServiceResponse(var connectionListener: ConnectionListener) :
     }
 
     override fun onNext(responseBaseResponse: BaseResponse?) {
-        callBackSubscriber!!.onServiceFinish()
         if (responseBaseResponse != null) {
             if (responseBaseResponse.code.toString().startsWith("2")) {
                 if (responseBaseResponse.data != null)

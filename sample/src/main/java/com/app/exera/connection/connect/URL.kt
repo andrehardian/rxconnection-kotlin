@@ -5,5 +5,5 @@ package com.app.exera.connection.connect
  */
 
 object URL {
-    val LOGIN = ""
+    val LOGIN = "https://api-development.pawoon.com/oauth/token"
 }

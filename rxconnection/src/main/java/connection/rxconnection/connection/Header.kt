@@ -1,9 +1,7 @@
 package connection.rxconnection.connection
 
 import android.content.Context
-
 import connection.rxconnection.session.SessionLogin
-import lombok.Setter
 import okhttp3.Headers
 
 /**
@@ -15,8 +13,8 @@ open class Header {
 
     protected fun headers(context: Context): Headers {
         val sessionLogin = SessionLogin(context)
-        val builder = Headers.Builder()
-        if (customHeader!!.size > 0) {
+        var builder = Headers.Builder()
+        if (customHeader != null && customHeader!!.size > 0) {
             for (key in customHeader!!.keys) {
                 builder.add(key, customHeader!![key])
             }

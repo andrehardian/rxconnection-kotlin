@@ -16,12 +16,15 @@ class Main2Activity : AppCompatActivity(), ConnectionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        login()
+/*
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
             download("https://i.ytimg.com/vi/fYDWCjZ3FLg/maxresdefault.jpg")
         } else {
             ActivityCompat.requestPermissions(this
                     , arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE), 1)
         }
+*/
     }
 
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {

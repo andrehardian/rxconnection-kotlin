@@ -57,7 +57,8 @@ class UtilsQueueOKHttp<T, E>(private var modelLog: ModelLog?, private val logInf
         if (response!!.code().toString().startsWith("2"))
             callBackOKHttp.success<Any>(BaseResponse().setCode(response.code()).setError(error))
         else {
-            val exceptionHttpRequest = ExceptionHttpRequest(error, response!!, throwable!!)
+            val exceptionHttpRequest = ExceptionHttpRequest(error, response!!, if (throwable == null)
+                Throwable() else throwable)
             callBackOKHttp.error(exceptionHttpRequest)
         }
     }
@@ -97,13 +98,14 @@ class UtilsQueueOKHttp<T, E>(private var modelLog: ModelLog?, private val logInf
             error = response.body()!!.string()
         } catch (e: IOException) {
             e.printStackTrace()
-            var value : Int
+            var value: Int
             var reader: Reader? = null
             try {
                 reader = response.body()!!.charStream()
                 value = reader!!.read()
                 while (value != -1) {
                     error += value.toChar()
+                    value = reader!!.read()
                 }
             } catch (e1: IOException) {
                 e1.printStackTrace()
@@ -120,13 +122,14 @@ class UtilsQueueOKHttp<T, E>(private var modelLog: ModelLog?, private val logInf
 
         } catch (e: OutOfMemoryError) {
             e.printStackTrace()
-            var value : Int
+            var value: Int
             var reader: Reader? = null
             try {
                 reader = response.body()!!.charStream()
                 value = reader!!.read()
                 while (value != -1) {
                     error += value.toChar()
+                    value = reader!!.read()
                 }
             } catch (e1: IOException) {
                 e1.printStackTrace()

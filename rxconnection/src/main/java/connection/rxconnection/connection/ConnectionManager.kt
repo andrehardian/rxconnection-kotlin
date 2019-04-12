@@ -3,8 +3,8 @@ package connection.rxconnection.connection
 import android.app.ProgressDialog
 import android.content.Context
 import rx.Observable
-import rx.schedulers.Schedulers
 import rx.android.schedulers.AndroidSchedulers
+import rx.schedulers.Schedulers
 
 /**
  * Created by AndreHF on 4/12/2017.
@@ -42,7 +42,7 @@ open class ConnectionManager : CallBackSubscriber {
                 progressDialog = ProgressDialog(context)
                 progressDialog!!.setCancelable(false)
             }
-            if (!progressDialog!!.isShowing && isShow) {
+            if (progressDialog != null && progressDialog!!.isShowing && isShow) {
                 progressDialog!!.show()
             }
         } catch (e: Exception) {
