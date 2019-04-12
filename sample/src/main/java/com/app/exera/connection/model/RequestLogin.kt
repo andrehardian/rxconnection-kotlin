@@ -8,12 +8,6 @@ import lombok.Data
 class RequestLogin : java.io.Serializable {
 
     var password: String? = null
-    @SerializedName("grant_type")
-    private var grantType = "password"
-    @SerializedName("client_secret")
-    private var clientSecret = "iBAhimye9KtrTP9tYsGHXW6XyTMczDhGDmaraudy"
-    @SerializedName("client_id")
-    private var clientId = "3"
     var username: String? = null
 
     fun setPassword(password: String): RequestLogin {
