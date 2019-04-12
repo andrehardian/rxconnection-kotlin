@@ -19,8 +19,9 @@ class ServiceManager : ConnectionManager(), ProgressDownloadListener {
     }
 
     fun download(s: String) {
+        var file: File = File(Environment.getExternalStorageDirectory().path + "/imdownload.jpg");
         val httpRequest = ConDownloadDB(this!!.context!!, s,
-                File(Environment.getExternalStorageDirectory().path),
+                file,
                 this)
         val header = HashMap<String, String>()
         header["version"] = BuildConfig.VERSION_NAME

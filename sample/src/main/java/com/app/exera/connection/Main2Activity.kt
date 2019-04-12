@@ -1,18 +1,35 @@
 package com.app.exera.connection
 
-import android.support.v7.app.AppCompatActivity
+import android.Manifest
+import android.content.pm.PackageManager
 import android.os.Bundle
+import android.support.v4.app.ActivityCompat
+import android.support.v4.content.ContextCompat
+import android.support.v7.app.AppCompatActivity
 import android.widget.Toast
 import com.app.exera.connection.connect.ServiceManager
 import com.app.exera.connection.model.RequestLogin
 import connection.rxconnection.connection.ConnectionListener
 import connection.rxconnection.connection.HttpRequest
 
-class Main2Activity : AppCompatActivity(),ConnectionListener {
+class Main2Activity : AppCompatActivity(), ConnectionListener {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        download("https://www.bmw-driver.net/forum/attachment.php?attachmentid=10953&d=1286998273")
+        if (ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED){
+            download("https://s3.ap-southeast-1.amazonaws.com/dev.pawoon.com/backup/3003-1544528282.db")
+        }else{
+            ActivityCompat.requestPermissions(this
+                    , arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE), 1)
+        }
+    }
+
+    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+        if (requestCode == 1) {
+            if (grantResults.size > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                download("https://s3.ap-southeast-1.amazonaws.com/dev.pawoon.com/backup/3003-1544528282.db")
+            }
+        }
     }
 
     private fun download(s: String) {
